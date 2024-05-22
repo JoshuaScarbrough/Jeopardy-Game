@@ -1,0 +1,26 @@
+/* some colors you may find useful:
+  #115ff4
+  #060ce9
+  #28a200
+  #8d2ab5
+  #74119c
+*/
+
+th {
+  border: 1px solid black;
+  width: 15%;
+  height: 50px;
+  margin: 2px;
+  display: inline-block;
+  
+}
+
+td {
+  border: 1px solid black;
+  width: 15%;
+  height: 105px;
+  margin: 2px;
+  font-size: .80em;
+  text-align: center;
+  display: inline-block;
+}
