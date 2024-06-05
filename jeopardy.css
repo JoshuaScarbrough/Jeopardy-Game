@@ -6,21 +6,128 @@
   #74119c
 */
 
+body{
+  background-color: #ffeaae;
+  text-align: center;
+}
+
+body h1{
+  color: #ff0000;
+  text-align: center;
+}
+
+#header{
+  position: relative;
+  text-align: center;
+}
+
+#start{
+    height: 50px;
+    width: 120px;
+    background-color: #ffc100;
+    display: inline-block;
+    margin: auto;
+
+
+    border: 1px solid black;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #ff0000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+  
+}
+
+#start:hover,
+#start:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #ff0000;
+}
+
+#start:active {
+  opacity: .1;
+}
+
+#restartButton1{
+  height: 50px;
+    width: 120px;
+    background-color: #ffc100;
+    display: inline-block;
+    margin: auto;
+
+
+    border: 1px solid black;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #ff0000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+}
+
+#restartButton1:hover,
+#restartButton1:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #ff0000;
+}
+
+#restartButton1:active {
+  opacity: .1;
+}
+
+#jeopardyTable{
+  display: inline-block;
+  margin-top: 20px;
+}
+
 th {
+  background-color: #ff0000;
   border: 1px solid black;
   width: 15%;
   height: 50px;
-  margin: 2px;
-  display: inline-block;
+  /* display: inline-block; */
   
 }
 
 td {
+  background-color: #ffc100;
   border: 1px solid black;
   width: 15%;
   height: 105px;
-  margin: 2px;
   font-size: .80em;
   text-align: center;
-  display: inline-block;
+  /* display: inline-block; */
+}
+
+.questionDiv{
+  width: 100%;
+  height: 50px;
+}
+
+.answerDiv{
+  width: 100%;
+  height: 50px;
 }

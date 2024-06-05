@@ -25,6 +25,7 @@ const apiUrlEndpoint = "https://rithm-jeopardy.herokuapp.com/api/categories?coun
 const NUM_CATEGORIES = 14;
 const NUM_QUESTIONS_PER_CAT = 5;
 let categories = [];
+const body = document.querySelector("body")
 const header = document.querySelector("#header")
 const startButton = document.querySelector("#start")
 let bodyDiv01 = document.querySelector("div")
@@ -33,6 +34,7 @@ let bodyDiv01 = document.querySelector("div")
 function startFillTable(evt){
     const startButton = evt.target
     console.log(startButton)
+    
 
     startButton.remove(startButton)
 
@@ -112,7 +114,6 @@ async function getCategory(catId) {
 
     let res2 = await axios.get(apiurlEnd2)
 
-    console.log(res2.data)
     return res2.data
 
 }
@@ -126,7 +127,11 @@ async function getCategory(catId) {
  */
 
 async function fillTable() {
+    // Shows the loading message
+    showLoadingView()
+    
     // This is the endpoint for the api that gives you the different catagory data, their ids, and title 
+    // show loading veiw, get data, wait, then hide loading veiw
     const res01 = await axios.get(apiUrlEndpoint)
     const res01Data = res01.data
 
@@ -135,12 +140,17 @@ async function fillTable() {
     // Call to the setupAndStart function and giving it a variable name
     const questions = await setupAndStart()
 
+    // Hides the loading message
+    hideLoadingView()
+
     const bodyDiv = document.querySelector("div")
     // Creation of the base table 
     const table = document.createElement("table")
+    table.id = "jeopardyTable"
     bodyDiv.append(table)
     // Creation of the thead section
     const tableHead = document.createElement("thead")
+    tableHead.id = "tableHeadId"
     table.append(tableHead)
     // add th headers 
     const tableRow = document.createElement("tr")
@@ -198,13 +208,17 @@ async function fillTable() {
                 const qDiv = document.createElement("div")
                 tabledata.append(qDiv)
                 qDiv.innerHTML = "???"
-                qDiv.style.display = "none"
+                qDiv.style.display = "block"
                 qDiv.id = "?"+ (count+1);
+            
 
-
+                // if(qDiv.style.display = "none"){
+                //     console.log("hello")
+                // }
                 // answer div 
 
                 const answerDiv = document.createElement("div")
+                answerDiv.classList.add("answerDiv")
                 tabledata.append(answerDiv)
                 answerDiv.innerHTML = value[j].answer
                 // style of divobj to be hidden
@@ -217,20 +231,29 @@ async function fillTable() {
                 // question div
 
                 const questionDiv = document.createElement("div")
+                questionDiv.classList.add("questionDiv")
                 tabledata.append(questionDiv)
                 questionDiv.innerHTML = value[j].question
 
-                questionDiv.style.display = "block"
+                questionDiv.style.display = "none"
 
                 questionDiv.id = "q"+ ( count+1);
 
 
                 count = count + 1;
 
+                questionDiv.addEventListener("click", function(){
+                    answerDiv.style.display = "block"
+                    questionDiv.innerHTML = ""
+                })
+                
 
+    
                 // tabledata.innerHTML = value[j].question
             }
+
         )
+
 
     }
 
@@ -248,8 +271,6 @@ async function fillTable() {
  * */
 
 function handleClick(evt) {
-    // log the evt
-    console.log(evt)
 
     // get the id of the target
     const id = evt.target.id
@@ -263,17 +284,17 @@ function handleClick(evt) {
 
     const slicedId = id.slice(1)
 
-    document.getElementById(
-        "?"+slicedId
-    ).style.display = "none"
+    // else if(document.getElementById("q" + slicedId).style.display = "block" &&  ){
+    //     document.getElementById("?" + slicedId).style.display = "none"
+    // }
+    // else{
+    //     console.log("okay")
+    // }
 
-    document.getElementById(
-        "q"+slicedId
-    ).style.display = "none";
-
-    document.getElementById(
-        "a"+slicedId
-    ).style.display = "block";
+    if(document.getElementById("?"+slicedId).style.display = "block"){
+        document.getElementById("?"+slicedId).style.display = "none"
+        document.getElementById("q"+slicedId).style.display = "block"
+    }
 
 }
 
@@ -281,15 +302,26 @@ function handleClick(evt) {
  * and update the button used to fetch data.
  */
 
+// hidden or visible / true or false
+// on click of start button 
+// show 
+// then 
 function showLoadingView() {
 
-
-
+    let loadingScreen = document.createElement("div")
+    loadingScreen.id = "load"
+    let loadingScreenH1 = document.createElement("h1")
+    loadingScreenH1.innerHTML = " LOADING..."
+    loadingScreen.append(loadingScreenH1)
+    body.append(loadingScreen)
+    loadingScreen.style.visibility = "visible"
 }
 
 /** Remove the loading spinner and update the button used to fetch data. */
 
 function hideLoadingView() {
+    let load = document.getElementById("load")
+    load.remove()
 }
 
 /** Start game:
@@ -323,7 +355,6 @@ async function setupAndStart() {
 
     // your going to call the fillTable function and fill it with the Questions and Answers / Clues 
     // fillTable(qas)
-    console.log(qas)
     return qas
 
 }
